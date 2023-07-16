@@ -1,5 +1,5 @@
 # `Team Hub API`
-### `POST api/login`
+### `POST api/auth/login`
 ##### Request body:
 * username `(STRING)`
 * password `(STRING)`
@@ -9,13 +9,17 @@
 ##### Response cookie:
 * jwt `(STRING)`
 ---
-### `POST api/refresh`
+### `POST api/auth/refresh`
 ##### Request cookie:
 * jwt `(STRING)`
 ##### Response object:
 * message `(STRING)`
 * accessToken `(OBJECT)` **or** `(NULL)`
 * userID `(STRING)` **or** `(NULL)`
+---
+### `POST api/auth/logout`
+##### Response object:
+* message `(STRING)`
 ---
 ### `GET api/users/:userID`
 ##### Request headers:

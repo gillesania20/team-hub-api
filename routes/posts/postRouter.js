@@ -1,0 +1,13 @@
+import express from 'express';
+import addPost from './../../controllers/posts/addPost.js';
+import deletePost from './../../controllers/posts/deletePost.js';
+import getAllPosts from './../../controllers/posts/getAllPosts.js';
+import getSinglePost from './../../controllers/posts/getSinglePost.js';
+import updatePost from './../../controllers/posts/updatePost.js';
+const router = express.Router();
+router.get('/', getAllPosts);
+router.get('/:postID', getSinglePost);
+router.post('/', addPost);
+router.patch('/:postID', updatePost);
+router.delete('/:postID', deletePost);
+export default router;
