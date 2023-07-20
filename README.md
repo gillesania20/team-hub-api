@@ -21,6 +21,13 @@
 ##### Response object:
 * message `(STRING)`
 ---
+### `POST api/users`
+##### Request body:
+* username `(STRING)`
+* password `(STRING)`
+##### Response object:
+* message `(STRING)`
+---
 ### `GET api/users/:userID`
 ##### Request headers:
 * authorization `(STRING)`
