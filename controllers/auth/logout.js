@@ -1,4 +1,5 @@
 const logout = (req, res) => {
-    return res.json('logout');
+    res.clearCookie('jwt');
+    return res.status(200).json('logout successful');
 }
 export default logout;
