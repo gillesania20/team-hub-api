@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import express from 'express';
+import cookieParser from 'cookie-parser';
 import connectToDB from './functions/connectToDB.js';
 import authRouter from './routes/auth/authRouter.js';
 import userRouter from './routes/users/userRouter.js';
@@ -10,6 +11,7 @@ const app = express();
 const PORT = process.env.PORT || 3500;
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+app.use(cookieParser());
 app.use('/api/auth', authRouter);
 app.use('/api/users', userRouter);
 app.use('/api/teams', teamRouter);
