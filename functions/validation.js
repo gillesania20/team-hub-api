@@ -1,4 +1,15 @@
 import { isValidObjectId } from 'mongoose';
+const validateBearerToken = (token) => {
+    const regex = new RegExp("^Bearer .{1,}")
+    //starts with 'Bearer ' followed by any characters
+    let output = false;
+    if(typeof token !== 'string'){
+        output = false;
+    }else{
+        output = regex.test(token);
+    }
+    return output;
+}
 const validateId = (id) => {
     let output = false;
     if(typeof id === 'string'){
@@ -9,9 +20,9 @@ const validateId = (id) => {
     return output;
 }
 const validateUsername = (username) => {
-    let output = false;
-    let regex = new RegExp("[a-zA-Z0-9_]{4,20}");
+    const regex = new RegExp("[a-zA-Z0-9_]{4,20}");
     //letters a-Z and underscore. minimum 4 characters and maximum 20 characters
+    let output = false;
     if(typeof username !== 'string'){
         output = false;
     }else{
@@ -20,9 +31,9 @@ const validateUsername = (username) => {
     return output;
 }
 const validatePassword = (password) => {
-    let output = false;
-    let regex = new RegExp("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,20}$");
+    const regex = new RegExp("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,20}$");
     //atleast one letter,number, and special character then minimum length is 8 and maximum is 20
+    let output = false;
     if(typeof password !== 'string'){
         output = false;
     }else{
@@ -32,9 +43,9 @@ const validatePassword = (password) => {
 }
 const validateBirthday = (birthday) => {
     const minAge = 18;
-    let output = false;
-    let regex = new RegExp("^\\d\\d\\d\\d-\\d\\d-\\d\\d$");
+    const regex = new RegExp("^\\d\\d\\d\\d-\\d\\d-\\d\\d$");
     //year-month-day, format: yyyy-mm-dd
+    let output = false;
     let checkRegex = false;
     let parsedDate = null;
     let checkIfNan = false;
@@ -82,9 +93,22 @@ const validateBirthday = (birthday) => {
     }
     return output;
 }
+const validateTeamName = (name) => {
+    const regex = new RegExp("^[a-zA-Z0-9_]{4,20}$")
+    //letters, numbers, and underscore only. minimum 4 and maximum 20 characters
+    let output = false;
+    if(typeof name !== 'string'){
+        output = false;
+    }else{
+        output = regex.test(name);
+    }
+    return output;
+}
 export {
+    validateBearerToken,
     validateId,
     validateUsername,
     validatePassword,
-    validateBirthday
+    validateBirthday,
+    validateTeamName
 }
