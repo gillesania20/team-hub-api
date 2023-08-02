@@ -1,7 +1,6 @@
 import bcrypt from 'bcrypt';
 import { SALT_ROUNDS } from './../../constants.js';
-import User from './../../models/users/User.js';
-import { userFindOne } from './../../models/users/userQueries.js';
+import { userFindOne, userCreate } from './../../models/users/userQueries.js';
 import { validateUsername, validatePassword, validateBirthday } from './../../functions/validation.js';
 const addUser = async (req, res) => {
     const username = req.body.username;
@@ -37,7 +36,7 @@ const addUser = async (req, res) => {
             }
         }else{
             hashedPassword = bcrypt.hashSync(password, SALT_ROUNDS);
-            await User.create({username, password: hashedPassword, birthday});
+            await userCreate({username, password: hashedPassword, birthday});
             response = {
                 status: 201,
                 message: 'user created'
