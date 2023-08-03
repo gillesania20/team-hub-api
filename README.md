@@ -173,3 +173,5 @@
 ##### Response object:
 * message `(STRING)`
 ---
+
+https://github.com/gitdagray/mern_stack_course/blob/main/lesson_13-backend/middleware/verifyJWT.js
