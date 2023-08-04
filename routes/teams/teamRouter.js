@@ -1,11 +1,12 @@
 import express from 'express';
+import verifyJWT from './../../middlewares/verifyJWT.js';
 import addTeam from './../../controllers/teams/addTeam.js';
 import deleteTeam from './../../controllers/teams/deleteTeam.js';
 import getSingleTeam from './../../controllers/teams/getSingleTeam.js';
 import updateTeam from './../../controllers/teams/updateTeam.js';
 const router = express.Router();
 router.get('/:teamID', getSingleTeam);
-router.post('/', addTeam);
+router.post('/', verifyJWT, addTeam);
 router.patch('/:teamID', updateTeam);
 router.delete('/:teamID', deleteTeam);
 export default router;

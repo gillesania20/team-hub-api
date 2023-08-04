@@ -1,26 +1,21 @@
-import jwt from 'jsonwebtoken';
 import { userFindOne } from './../../models/users/userQueries.js';
 import { teamFindOne, teamCreate } from './../../models/teams/teamQueries.js';
-import { validateBearerToken, validateTeamName } from './../../functions/validation.js';
+import { validateUsername, validateTeamName } from './../../functions/validation.js';
 const addTeam = async (req, res) => {
-    const bearerToken = req.headers.authorization;
+    const username = req.username;
     const name = req.body.name;
-    const validatedBearerToken = validateBearerToken(bearerToken);
+    const validatedUsername = validateUsername(username);
     let validatedTeamName = false;
     let response = null;
-    let accessToken = null;
-    let decoded = null;
     let findUser = null;
     let findTeam = null;
-    if(validatedBearerToken === false){
+    if(validatedUsername === false){
         response = {
             status: 400,
-            message: 'invalid token'
+            message: 'invalid username'
         }
     }else{
-        accessToken = bearerToken.split(" ")[1];
-        decoded = jwt.verify(accessToken, process.env.ACCESS_TOKEN_KEY);
-        findUser = await userFindOne({username: decoded.username}, '_id');
+        findUser = await userFindOne({username}, '_id');
         if(findUser === null){
             response = {
                 status: 404,
