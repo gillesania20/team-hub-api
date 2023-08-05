@@ -8,5 +8,5 @@ const router = express.Router();
 router.get('/:teamID', getSingleTeam);
 router.post('/', verifyJWT, addTeam);
 router.patch('/:teamID', updateTeam);
-router.delete('/:teamID', deleteTeam);
+router.delete('/:teamID', verifyJWT, deleteTeam);
 export default router;
