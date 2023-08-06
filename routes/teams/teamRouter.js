@@ -7,6 +7,6 @@ import updateTeam from './../../controllers/teams/updateTeam.js';
 const router = express.Router();
 router.get('/:teamID', verifyJWT, getSingleTeam);
 router.post('/', verifyJWT, addTeam);
-router.patch('/:teamID', updateTeam);
+router.patch('/:teamID', verifyJWT, updateTeam);
 router.delete('/:teamID', verifyJWT, deleteTeam);
 export default router;

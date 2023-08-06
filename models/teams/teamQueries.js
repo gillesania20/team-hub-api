@@ -11,8 +11,13 @@ const teamDeleteOne = async (filter) => {
     const query = await Team.deleteOne(filter);
     return query;
 }
+const teamUpdateOne = async (filter, update) => {
+    const query = await Team.updateOne(filter, update);
+    return query;
+}
 export {
     teamCreate,
     teamFindOne,
-    teamDeleteOne
+    teamDeleteOne,
+    teamUpdateOne
 }
