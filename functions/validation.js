@@ -104,11 +104,23 @@ const validateTeamName = (name) => {
     }
     return output;
 }
+const validateBody = (body) => {
+    const regex = new RegExp("^\\S.{0,500}$");
+    //should start with any character followed by any character or white space. minimum 1 and maximum 500 characters
+    let output = false;
+    if(typeof body !== 'string'){
+        output = false;
+    }else{
+        output = regex.test(body);
+    }
+    return output;
+}
 export {
     validateBearerToken,
     validateId,
     validateUsername,
     validatePassword,
     validateBirthday,
-    validateTeamName
+    validateTeamName,
+    validateBody
 }
