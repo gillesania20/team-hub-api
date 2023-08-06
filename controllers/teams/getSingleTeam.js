@@ -33,7 +33,7 @@ const getSingleTeam = async (req, res) => {
                 }
             }else{
                 findTeam = await teamFindOne({_id: teamID, leader: findUser._id.toString()},
-                    '_id name leader members created_at');
+                    '_id name leader created_at');
                 if(findTeam === null){
                     response = {
                         status: 404,

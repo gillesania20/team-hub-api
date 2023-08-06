@@ -3,14 +3,8 @@ import User from './../users/User.js';
 import Post from './../posts/Post.js';
 const commentSchema = new mongoose.Schema({
     body: { type: String, required: true },
-    user: { type: mongoose.Schema.Types.ObjectId, ref: User },
-    post: { type: mongoose.Schema.Types.ObjectId, ref: Post },
-    like: { type: [{
-        type: mongoose.Schema.Types.ObjectId, ref: User
-    }], default: [] },
-    dislike: { type: [{
-        type: mongoose.Schema.Types.ObjectId, ref: User
-    }], default: [] }
+    user: { type: mongoose.Schema.Types.ObjectId, ref: User, required: true },
+    post: { type: mongoose.Schema.Types.ObjectId, ref: Post, required: true }
 },
 {
     timestamps: {
@@ -18,5 +12,6 @@ const commentSchema = new mongoose.Schema({
         updatedAt: 'updated_at'
     }
 });
+commentSchema.index({ user: 1, post: 1, created_at: 1 })
 const Comment = mongoose.model('Comment', commentSchema);
 export default Comment;
