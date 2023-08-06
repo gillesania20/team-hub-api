@@ -45,7 +45,7 @@ const updateTeam = async (req, res) => {
                     if(typeof name !== 'undefined' && validatedTeamName === false){
                         response = {
                             status: 400,
-                            message: 'invalid team name'
+                            message: 'invalid team name. letters, numbers, and underscore only. minimum 4 and maximum 20 characters'
                         }
                     }else{
                         if(typeof name !== 'undefined'){

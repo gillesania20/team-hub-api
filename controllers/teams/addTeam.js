@@ -11,8 +11,8 @@ const addTeam = async (req, res) => {
     let findTeam = null;
     if(validatedUsername === false){
         response = {
-            status: 400,
-            message: 'invalid username'
+            status: 401,
+            message: 'not authorized'
         }
     }else{
         findUser = await userFindOne({username}, '_id');
@@ -26,7 +26,7 @@ const addTeam = async (req, res) => {
             if(validatedTeamName === false){
                 response = {
                     status: 400,
-                    message: 'invalid team name'
+                    message: 'invalid team name. letters, numbers, and underscore only. minimum 4 and maximum 20 characters'
                 }
             }else{
                 findTeam = await teamFindOne({name, leader: findUser._id.toString()}, '_id');
