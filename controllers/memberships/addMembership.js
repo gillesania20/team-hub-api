@@ -1,15 +1,12 @@
 import { userFindOne } from './../../models/users/userQueries.js';
 import { teamFindOne } from './../../models/teams/teamQueries.js';
-import { postCreate } from './../../models/posts/postQueries.js';
-import { membershipFindOne } from './../../models/memberships/membershipQueries.js';
-import { validateUsername, validateId, validateBody } from './../../functions/validation.js';
-const addPost = async (req, res) => {
+import { membershipFindOne, membershipCreate } from './../../models/memberships/membershipQueries.js';
+import { validateUsername, validateId } from './../../functions/validation.js';
+const addMembership = async (req, res) => {
     const username = req.username;
     const teamID = req.body.teamID;
-    const body = req.body.body;
     const validatedUsername = validateUsername(username);
     let validatedTeamId = false;
-    let validatedBody = false;
     let response = null;
     let findUser = null;
     let findTeam = null;
@@ -34,7 +31,7 @@ const addPost = async (req, res) => {
                     message: 'invalid team ID'
                 }
             }else{
-                findTeam = await teamFindOne({_id: teamID});
+                findTeam = await teamFindOne({_id: teamID}, '_id');
                 if(findTeam === null){
                     response = {
                         status: 404,
@@ -43,24 +40,16 @@ const addPost = async (req, res) => {
                 }else{
                     findMembership = await membershipFindOne({user: findUser._id.toString(), team: findTeam._id.toString()},
                         '_id');
-                    if(findMembership === null){
+                    if(findMembership !== null){
                         response = {
-                            status: 403,
-                            message: 'not authorized'
+                            status: 400,
+                            message: 'membership already exist'
                         }
                     }else{
-                        validatedBody = validateBody(body);
-                        if(validatedBody === false){
-                            response = {
-                                status: 400,
-                                message: 'invalid body. should start with any character followed by any character or white space. minimum 1 and maximum 500 characters'
-                            }
-                        }else{
-                            await postCreate({body, user: findUser._id.toString(), team: findTeam._id.toString()});
-                            response = {
-                                status: 201,
-                                message: 'post created'
-                            }
+                        await membershipCreate({user: findUser._id.toString(), team: findTeam._id.toString()});
+                        response ={
+                            status: 201,
+                            message: 'membership created'
                         }
                     }
                 }
@@ -69,4 +58,4 @@ const addPost = async (req, res) => {
     }
     return res.status(response.status).json({message: response.message});
 }
-export default addPost;
+export default addMembership;

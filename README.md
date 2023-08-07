@@ -82,9 +82,27 @@
 ##### Response object:
 * message `(STRING)`
 ---
+### `POST api/memberships`
+##### Request headers:
+* authorization `(STRING)`
+##### Request body:
+* teamID `(STRING)`
+##### Response object:
+* message `(STRING)`
+---
+### `DELETE api/memberships/:membershipID`
+##### Request headers:
+* authorization `(STRING)`
+##### Request path parameters:
+* membershipID
+##### Response object:
+* message `(STRING)`
+---
 ### `GET api/posts`
 ##### Request headers:
 * authorization `(STRING)`
+##### Request body:
+* teamID `(STRING)`
 ##### Response object:
 * message `(STRING)`
 * posts `(ARRAY)` **or** `(NULL)`
@@ -102,6 +120,7 @@
 ##### Request headers:
 * authorization `(STRING)`
 ##### Request body:
+* teamID `(STRING)`
 * body `(STRING)`
 ##### Response object:
 * message `(STRING)`

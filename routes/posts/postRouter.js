@@ -6,7 +6,7 @@ import getSinglePost from './../../controllers/posts/getSinglePost.js';
 import updatePost from './../../controllers/posts/updatePost.js';
 import verifyJWT from './../../middlewares/verifyJWT.js';
 const router = express.Router();
-router.get('/', getAllPosts);
+router.get('/', verifyJWT, getAllPosts);
 router.get('/:postID', getSinglePost);
 router.post('/', verifyJWT, addPost);
 router.patch('/:postID', updatePost);
