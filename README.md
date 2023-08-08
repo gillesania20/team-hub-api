@@ -146,6 +146,23 @@
 ##### Response object:
 * message `(STRING)`
 ---
+### `POST api/post_votes`
+##### Request headers:
+* authorization `(STRING)`
+##### Request body:
+* postID `(STRING)`
+* vote `(NUMBER)`
+##### Response object:
+* message `(STRING)`
+---
+### `DELETE api/post_votes/:postVoteID`
+##### Request headers:
+* authorization `(STRING)`
+##### Request path parameters:
+* postVoteID `(STRING)`
+##### Response object:
+* message `(STRING)`
+---
 ### `GET api/comments`
 ##### Request headers:
 * authorization `(STRING)`

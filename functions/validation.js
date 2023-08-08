@@ -115,6 +115,17 @@ const validateBody = (body) => {
     }
     return output;
 }
+const validateVote = (vote) => {
+    let output = false;
+    if(typeof vote !== 'number'){
+        output = false;
+    }else if(vote === 1 || vote === -1){
+        output = true;
+    }else{
+        output = false;
+    }
+    return output;
+}
 export {
     validateBearerToken,
     validateId,
@@ -122,5 +133,6 @@ export {
     validatePassword,
     validateBirthday,
     validateTeamName,
-    validateBody
+    validateBody,
+    validateVote
 }
