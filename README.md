@@ -112,6 +112,8 @@
 * authorization `(STRING)`
 ##### Request path parameters:
 * postID `(STRING)`
+##### Request body:
+* teamID `(STRING)`
 ##### Response object:
 * message `(STRING)`
 * post `(OBJECT)`
