@@ -133,10 +133,8 @@
 ##### Request path parameters:
 * postID `(STRING)`
 ##### Request body:
+* teamID `(STRING)`
 * body `(STRING)`
-* comments `(ARRAY)`
-* like `(ARRAY)`
-* dislike `(ARRAY)`
 ##### Response object:
 * message `(STRING)`
 ---

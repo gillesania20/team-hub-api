@@ -11,8 +11,13 @@ const postCreate = async (docs) => {
     const query = await Post.create(docs);
     return query;
 }
+const postUpdateOne = async (filter, update) => {
+    const query = await Post.updateOne(filter, update);
+    return query;
+}
 export {
     postFindOne,
     postFindAndPopulate,
-    postCreate
+    postCreate,
+    postUpdateOne
 }
