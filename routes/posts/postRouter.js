@@ -10,5 +10,5 @@ router.get('/', verifyJWT, getAllPosts);
 router.get('/:postID', verifyJWT, getSinglePost);
 router.post('/', verifyJWT, addPost);
 router.patch('/:postID', verifyJWT, updatePost);
-router.delete('/:postID', deletePost);
+router.delete('/:postID', verifyJWT, deletePost);
 export default router;

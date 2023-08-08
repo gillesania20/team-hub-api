@@ -15,9 +15,14 @@ const postUpdateOne = async (filter, update) => {
     const query = await Post.updateOne(filter, update);
     return query;
 }
+const postDeleteOne = async (conditions) => {
+    const query = await Post.deleteOne(conditions);
+    return query;
+}
 export {
     postFindOne,
     postFindAndPopulate,
     postCreate,
-    postUpdateOne
+    postUpdateOne,
+    postDeleteOne
 }
