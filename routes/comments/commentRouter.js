@@ -10,5 +10,5 @@ router.get('/', verifyJWT, getAllComments);
 router.get('/:commentID', verifyJWT, getSingleComment);
 router.post('/', verifyJWT, addComment);
 router.patch('/:commentID', verifyJWT, updateComment);
-router.delete('/:commentID', deleteComment);
+router.delete('/:commentID', verifyJWT, deleteComment);
 export default router;

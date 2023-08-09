@@ -15,9 +15,14 @@ const commentUpdateOne = async (filter, update) => {
     const query = await Comment.updateOne(filter, update);
     return query;
 }
+const commentDeleteOne = async (conditions) => {
+    const query = await Comment.deleteOne(conditions);
+    return query;
+}
 export {
     commentFindAndPopulate,
     commentFindOne,
     commentCreate,
-    commentUpdateOne
+    commentUpdateOne,
+    commentDeleteOne
 }
