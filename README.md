@@ -177,9 +177,11 @@
 * authorization `(STRING)`
 ##### Request path parameters:
 * commentID `(STRING)`
+##### Request body:
+* postID `(STRING)`
 ##### Response object:
 * message `(STRING)`
-* comment `(OBJECT)`
+* comment `(OBJECT)` **or** `(NULL)`
 ---
 ### `POST api/comments`
 ##### Request headers:

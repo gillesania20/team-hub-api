@@ -7,7 +7,7 @@ import updateComment from './../../controllers/comments/updateComment.js';
 import verifyJWT from './../../middlewares/verifyJWT.js';
 const router = express.Router();
 router.get('/', verifyJWT, getAllComments);
-router.get('/:commentID', getSingleComment);
+router.get('/:commentID', verifyJWT, getSingleComment);
 router.post('/', verifyJWT, addComment);
 router.patch('/:commentID', updateComment);
 router.delete('/:commentID', deleteComment);
