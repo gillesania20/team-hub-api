@@ -166,6 +166,8 @@
 ### `GET api/comments`
 ##### Request headers:
 * authorization `(STRING)`
+##### Request body:
+* postID `(STRING)`
 ##### Response object:
 * message `(STRING)`
 * comments `(ARRAY)` **or** `(NULL)`

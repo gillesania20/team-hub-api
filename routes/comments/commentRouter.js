@@ -6,7 +6,7 @@ import getSingleComment from './../../controllers/comments/getSingleComment.js';
 import updateComment from './../../controllers/comments/updateComment.js';
 import verifyJWT from './../../middlewares/verifyJWT.js';
 const router = express.Router();
-router.get('/', getAllComments);
+router.get('/', verifyJWT, getAllComments);
 router.get('/:commentID', getSingleComment);
 router.post('/', verifyJWT, addComment);
 router.patch('/:commentID', updateComment);
