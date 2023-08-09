@@ -1,17 +1,13 @@
 import { userFindOne } from './../../models/users/userQueries.js';
-import { teamFindOne } from './../../models/teams/teamQueries.js';
 import { postFindOne, postDeleteOne } from './../../models/posts/postQueries.js';
 import { validateUsername, validateId } from './../../functions/validation.js';
 const deletePost = async (req, res) => {
     const username = req.username;
-    const teamID = req.body.teamID;
     const postID = req.params.postID;
     const validatedUsername = validateUsername(username);
-    let validatedTeamId = false;
     let validatedPostId = false;
     let response = null;
     let findUser = null;
-    let findTeam = null;
     let findPost = null;
     if(validatedUsername === false){
         response = {
@@ -26,41 +22,25 @@ const deletePost = async (req, res) => {
                 message: 'user not found'
             }
         }else{
-            validatedTeamId = validateId(teamID);
-            if(validatedTeamId === false){
+            validatedPostId = validateId(postID);
+            if(validatedPostId === false){
                 response = {
                     status: 400,
-                    message: 'invalid team ID'
+                    message: 'invalid post ID'
                 }
             }else{
-                findTeam = await teamFindOne({_id: teamID}, '_id');
-                if(findTeam === null){
+                findPost = await postFindOne({_id: postID, user: findUser._id.toString()},
+                    '_id');
+                if(findPost === null){
                     response = {
                         status: 404,
-                        message: 'team not found'
+                        message: 'post not found'
                     }
                 }else{
-                    validatedPostId = validateId(postID);
-                    if(validatedPostId === false){
-                        response = {
-                            status: 400,
-                            message: 'invalid post ID'
-                        }
-                    }else{
-                        findPost = await postFindOne({_id: postID, user: findUser._id.toString(), team: findTeam._id.toString()},
-                            '_id');
-                        if(findPost === null){
-                            response = {
-                                status: 404,
-                                message: 'post not found'
-                            }
-                        }else{
-                            await postDeleteOne({_id: findPost._id.toString()});
-                            response = {
-                                status: 200,
-                                message: 'post deleted'
-                            }
-                        }
+                    await postDeleteOne({_id: findPost._id.toString()});
+                    response = {
+                        status: 200,
+                        message: 'post deleted'
                     }
                 }
             }

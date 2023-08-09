@@ -112,8 +112,6 @@
 * authorization `(STRING)`
 ##### Request path parameters:
 * postID `(STRING)`
-##### Request body:
-* teamID `(STRING)`
 ##### Response object:
 * message `(STRING)`
 * post `(OBJECT)`
@@ -133,7 +131,6 @@
 ##### Request path parameters:
 * postID `(STRING)`
 ##### Request body:
-* teamID `(STRING)`
 * body `(STRING)`
 ##### Response object:
 * message `(STRING)`
@@ -177,8 +174,6 @@
 * authorization `(STRING)`
 ##### Request path parameters:
 * commentID `(STRING)`
-##### Request body:
-* postID `(STRING)`
 ##### Response object:
 * message `(STRING)`
 * comment `(OBJECT)` **or** `(NULL)`
@@ -199,7 +194,6 @@
 ##### Request path parameters:
 * commentID `(STRING)`
 ##### Request body:
-* postID `(STRING)`
 * body `(STRING)`
 ##### Response object:
 * message `(STRING)`
