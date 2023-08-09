@@ -206,3 +206,12 @@
 ##### Response object:
 * message `(STRING)`
 ---
+### `POST api/comment_votes`
+##### Request headers:
+* authorization `(STRING)`
+##### Request body:
+* commentID `(STRING)`
+* vote `(NUMBER)`
+##### Response object:
+* message `(STRING)`
+---
