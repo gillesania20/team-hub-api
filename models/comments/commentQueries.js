@@ -11,8 +11,13 @@ const commentCreate = async (docs) => {
     const query = await Comment.create(docs);
     return query;
 }
+const commentUpdateOne = async (filter, update) => {
+    const query = await Comment.updateOne(filter, update);
+    return query;
+}
 export {
     commentFindAndPopulate,
     commentFindOne,
-    commentCreate
+    commentCreate,
+    commentUpdateOne
 }

@@ -199,9 +199,8 @@
 ##### Request path parameters:
 * commentID `(STRING)`
 ##### Request body:
+* postID `(STRING)`
 * body `(STRING)`
-* like `(ARRAY)`
-* dislike `(ARRAY)`
 ##### Response object:
 * message `(STRING)`
 ---

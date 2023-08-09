@@ -9,6 +9,6 @@ const router = express.Router();
 router.get('/', verifyJWT, getAllComments);
 router.get('/:commentID', verifyJWT, getSingleComment);
 router.post('/', verifyJWT, addComment);
-router.patch('/:commentID', updateComment);
+router.patch('/:commentID', verifyJWT, updateComment);
 router.delete('/:commentID', deleteComment);
 export default router;
