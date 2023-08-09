@@ -4,5 +4,5 @@ import deleteCommentVote from './../../controllers/commentVotes/deleteCommentVot
 import verifyJWT from './../../middlewares/verifyJWT.js';
 const router = express.Router();
 router.post('/', verifyJWT, addCommentVote);
-router.delete('/:commentVoteID', deleteCommentVote);
+router.delete('/:commentVoteID', verifyJWT, deleteCommentVote);
 export default router;

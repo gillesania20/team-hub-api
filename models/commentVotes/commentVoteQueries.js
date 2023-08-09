@@ -7,7 +7,12 @@ const commentVoteCreate = async (docs) => {
     const query = await CommentVote.create(docs);
     return query;
 }
+const commentVoteDeleteOne = async (conditions) => {
+    const query = await CommentVote.deleteOne(conditions);
+    return query;
+}
 export {
     commentVoteFindOne,
-    commentVoteCreate
+    commentVoteCreate,
+    commentVoteDeleteOne
 }

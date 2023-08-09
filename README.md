@@ -215,3 +215,11 @@
 ##### Response object:
 * message `(STRING)`
 ---
+### `DELETE api/comment_votes/:commentVoteID`
+##### Request headers:
+* authorization `{STRING}`
+##### Request path parameters:
+* commentVoteID `(STRING)`
+##### Response object:
+* message `(STRING)`
+---
