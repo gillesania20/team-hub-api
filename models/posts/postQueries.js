@@ -1,22 +1,26 @@
 import Post from './Post.js';
-const postFindOne = async (conditions, projection) => {
-    const query = await Post.findOne(conditions, projection).lean().exec();
+const postFindOne = async (conditions, projection, options) => {
+    const query = await Post.findOne(conditions, projection, options).lean().exec();
     return query;
 }
-const postFindAndPopulate = async (filter, projection) => {
-    const query = await Post.find(filter, projection).populate('user', 'username').lean().exec();
+const postFindAndPopulate = async (filter, projection, options) => {
+    const query = await Post.find(filter, projection, options).populate('user', 'username').lean().exec();
     return query;
 }
-const postCreate = async (docs) => {
-    const query = await Post.create(docs);
+const postCreate = async (docs, options) => {
+    const query = await Post.create(docs, options);
     return query;
 }
-const postUpdateOne = async (filter, update) => {
-    const query = await Post.updateOne(filter, update);
+const postUpdateOne = async (filter, update, options) => {
+    const query = await Post.updateOne(filter, update, options);
     return query;
 }
-const postDeleteOne = async (conditions) => {
-    const query = await Post.deleteOne(conditions);
+const postDeleteOne = async (conditions, options) => {
+    const query = await Post.deleteOne(conditions, options);
+    return query;
+}
+const postDeleteMany = async (conditions, options) => {
+    const query = await Post.deleteMany(conditions, options);
     return query;
 }
 export {
@@ -24,5 +28,6 @@ export {
     postFindAndPopulate,
     postCreate,
     postUpdateOne,
-    postDeleteOne
+    postDeleteOne,
+    postDeleteMany
 }

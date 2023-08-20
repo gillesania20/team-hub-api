@@ -1,18 +1,23 @@
 import PostVote from './PostVote.js';
-const postVoteFindOne = async (conditions, projection) => {
-    const query = await PostVote.findOne(conditions, projection).lean().exec();
+const postVoteFindOne = async (conditions, projection, options) => {
+    const query = await PostVote.findOne(conditions, projection, options).lean().exec();
     return query;
 }
-const postVoteCreate = async (docs) => {
-    const query = await PostVote.create(docs);
+const postVoteCreate = async (docs, options) => {
+    const query = await PostVote.create(docs, options);
     return query;
 }
-const postVoteDeleteOne = async (conditions) => {
-    const query = await PostVote.deleteOne(conditions);
+const postVoteDeleteOne = async (conditions, options) => {
+    const query = await PostVote.deleteOne(conditions, options);
+    return query;
+}
+const postVoteDeleteMany = async (conditions, options) => {
+    const query = await PostVote.deleteMany(conditions, options);
     return query;
 }
 export {
     postVoteFindOne,
     postVoteCreate,
-    postVoteDeleteOne
+    postVoteDeleteOne,
+    postVoteDeleteMany
 }

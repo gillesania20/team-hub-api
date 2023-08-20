@@ -1,18 +1,18 @@
 import Team from './Team.js';
-const teamCreate = async (docs) => {
-    const query = await Team.create(docs);
+const teamCreate = async (docs, options) => {
+    const query = await Team.create(docs, options);
     return query;
 }
-const teamFindOne = async (conditions, projection) => {
-    const query = await Team.findOne(conditions, projection).lean().exec();
+const teamFindOne = async (conditions, projection, options) => {
+    const query = await Team.findOne(conditions, projection, options).lean().exec();
     return query;
 }
-const teamDeleteOne = async (filter) => {
-    const query = await Team.deleteOne(filter);
+const teamDeleteOne = async (filter, options) => {
+    const query = await Team.deleteOne(filter, options);
     return query;
 }
-const teamUpdateOne = async (filter, update) => {
-    const query = await Team.updateOne(filter, update);
+const teamUpdateOne = async (filter, update, options) => {
+    const query = await Team.updateOne(filter, update, options);
     return query;
 }
 export {

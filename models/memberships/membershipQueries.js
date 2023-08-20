@@ -1,18 +1,23 @@
 import Membership from './Membership.js';
-const membershipFindOne = async (conditions, projection) => {
-    const query = await Membership.findOne(conditions, projection).lean().exec();
+const membershipFindOne = async (conditions, projection, options) => {
+    const query = await Membership.findOne(conditions, projection, options).lean().exec();
     return query;
 }
-const membershipCreate = async (docs) => {
-    const query = await Membership.create(docs);
+const membershipCreate = async (docs, options) => {
+    const query = await Membership.create(docs, options);
     return query;
 }
-const membershipDeleteOne = async (conditions) => {
-    const query = await Membership.deleteOne(conditions);
+const membershipDeleteOne = async (conditions, options) => {
+    const query = await Membership.deleteOne(conditions, options);
+    return query;
+}
+const membershipDeleteMany = async (conditions, options) => {
+    const query = await Membership.deleteMany(conditions, options);
     return query;
 }
 export {
     membershipFindOne,
     membershipCreate,
-    membershipDeleteOne
+    membershipDeleteOne,
+    membershipDeleteMany
 }

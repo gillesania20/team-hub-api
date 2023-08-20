@@ -1,28 +1,38 @@
 import Comment from './Comment.js';
-const commentFindAndPopulate = async (filter, projection) => {
-    const query = await Comment.find(filter, projection).populate('user', 'username').lean().exec();
+const commentFind = async (filter, projection, options) => {
+    const query = await Comment.find(filter, projection, options).lean().exec();
     return query;
 }
-const commentFindOne = async (conditions, projection) => {
-    const query = await Comment.findOne(conditions, projection).lean().exec();
+const commentFindAndPopulate = async (filter, projection, options) => {
+    const query = await Comment.find(filter, projection, options).populate('user', 'username').lean().exec();
     return query;
 }
-const commentCreate = async (docs) => {
-    const query = await Comment.create(docs);
+const commentFindOne = async (conditions, projection, options) => {
+    const query = await Comment.findOne(conditions, projection, options).lean().exec();
     return query;
 }
-const commentUpdateOne = async (filter, update) => {
-    const query = await Comment.updateOne(filter, update);
+const commentCreate = async (docs, options) => {
+    const query = await Comment.create(docs, options);
     return query;
 }
-const commentDeleteOne = async (conditions) => {
-    const query = await Comment.deleteOne(conditions);
+const commentUpdateOne = async (filter, update, options) => {
+    const query = await Comment.updateOne(filter, update, options);
+    return query;
+}
+const commentDeleteOne = async (conditions, options) => {
+    const query = await Comment.deleteOne(conditions, options);
+    return query;
+}
+const commentDeleteMany = async (conditions, options) => {
+    const query = await Comment.deleteMany(conditions, options);
     return query;
 }
 export {
+    commentFind,
     commentFindAndPopulate,
     commentFindOne,
     commentCreate,
     commentUpdateOne,
-    commentDeleteOne
+    commentDeleteOne,
+    commentDeleteMany
 }
