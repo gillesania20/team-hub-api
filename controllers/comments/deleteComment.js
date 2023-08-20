@@ -1,5 +1,7 @@
+import mongoose from 'mongoose';
 import { userFindOne } from './../../models/users/userQueries.js';
 import { commentFindOne, commentDeleteOne } from './../../models/comments/commentQueries.js';
+import { commentVoteDeleteMany } from './../../models/commentVotes/commentVoteQueries.js';
 import { validateUsername, validateId } from './../../functions/validation.js';
 const deleteComment = async (req, res) => {
     const username = req.username;
@@ -9,6 +11,7 @@ const deleteComment = async (req, res) => {
     let response = null;
     let findUser = null;
     let findComment = null;
+    let session = null;
     if(validatedUsername === false){
         response = {
             status: 401,
@@ -36,7 +39,12 @@ const deleteComment = async (req, res) => {
                         message: 'comment not found'
                     }
                 }else{
-                    await commentDeleteOne({_id: findComment._id.toString()});
+                    session = await mongoose.startSession();
+                    session.startTransaction();
+                    await commentDeleteOne({_id: findComment._id}, {session});
+                    await commentVoteDeleteMany({comment: findComment._id}, {session});
+                    await session.commitTransaction();
+                    session.endSession();
                     response = {
                         status: 200,
                         message: 'comment deleted'
