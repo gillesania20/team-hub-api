@@ -1,9 +1,11 @@
 import mongoose from 'mongoose';
 import Post from './../posts/Post.js';
 import User from './../users/User.js';
+import Team from './../teams/Team.js';
 const postVoteSchema = new mongoose.Schema({
     post: { type: mongoose.Schema.Types.ObjectId, ref: Post, required: true },
     user: { type: mongoose.Schema.Types.ObjectId, ref: User, required: true },
+    team: { type: mongoose.Schema.Types.ObjectId, ref: Team, required: true },
     vote: { type: Number, required: true}
 },
 {

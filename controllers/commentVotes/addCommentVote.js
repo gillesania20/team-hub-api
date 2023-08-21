@@ -1,16 +1,20 @@
 import { userFindOne } from './../../models/users/userQueries.js';
+import { teamFindOne } from './../../models/teams/teamQueries.js';
 import { commentFindOne } from './../../models/comments/commentQueries.js';
 import { commentVoteFindOne, commentVoteCreate } from './../../models/commentVotes/commentVoteQueries.js';
 import { validateUsername, validateId, validateVote } from './../../functions/validation.js';
 const addCommentVote = async (req, res) => {
     const username = req.username;
+    const teamID = req.body.teamID;
     const commentID = req.body.commentID;
     const vote = req.body.vote;
     const validatedUsername = validateUsername(username);
+    let validatedTeamId = false;
     let validatedCommentId = false;
     let validatedVote = false;
     let response = null;
     let findUser = null;
+    let findTeam = null;
     let findComment = null;
     let findCommentVote = null;
     if(validatedUsername === false){
@@ -26,40 +30,56 @@ const addCommentVote = async (req, res) => {
                 message: 'user not found'
             }
         }else{
-            validatedCommentId = validateId(commentID);
-            if(validatedCommentId === false){
+            validatedTeamId = validateId(teamID);
+            if(validatedTeamId === false){
                 response = {
                     status: 400,
-                    message: 'invalid comment ID'
+                    message: 'invalid team ID'
                 }
             }else{
-                findComment = await commentFindOne({_id: commentID}, '_id');
-                if(findComment === null){
+                findTeam = await teamFindOne({_id: teamID}, '_id');
+                if(findTeam === null){
                     response = {
                         status: 404,
-                        message: 'comment not found'
+                        message: 'team not found'
                     }
                 }else{
-                    findCommentVote = await commentVoteFindOne({user: findUser._id.toString(), comment: findComment._id.toString()}
-                        ,'_id');
-                    if(findCommentVote !== null){
+                    validatedCommentId = validateId(commentID);
+                    if(validatedCommentId === false){
                         response = {
                             status: 400,
-                            message: 'comment-vote already exist'
+                            message: 'invalid comment ID'
                         }
                     }else{
-                        validatedVote = validateVote(vote);
-                        if(validatedVote === false){
+                        findComment = await commentFindOne({_id: commentID}, '_id');
+                        if(findComment === null){
                             response = {
-                                status: 400,
-                                message: 'invalid vote. should be a number. value should be 1 or -1 only'
+                                status: 404,
+                                message: 'comment not found'
                             }
                         }else{
-                            await commentVoteCreate(
-                                {vote, user: findUser._id.toString(), comment: findComment._id.toString()});
-                            response = {
-                                status: 201,
-                                message: 'comment-vote created'
+                            findCommentVote = await commentVoteFindOne({user: findUser._id, comment: findComment._id}
+                                ,'_id');
+                            if(findCommentVote !== null){
+                                response = {
+                                    status: 400,
+                                    message: 'comment-vote already exist'
+                                }
+                            }else{
+                                validatedVote = validateVote(vote);
+                                if(validatedVote === false){
+                                    response = {
+                                        status: 400,
+                                        message: 'invalid vote. should be a number. value should be 1 or -1 only'
+                                    }
+                                }else{
+                                    await commentVoteCreate(
+                                        {vote, user: findUser._id, comment: findComment._id, team: findTeam._id});
+                                    response = {
+                                        status: 201,
+                                        message: 'comment-vote created'
+                                    }
+                                }
                             }
                         }
                     }
