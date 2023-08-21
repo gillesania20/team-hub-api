@@ -1,5 +1,11 @@
+import mongoose from 'mongoose';
 import { userFindOne } from './../../models/users/userQueries.js';
 import { teamFindOne, teamDeleteOne } from './../../models/teams/teamQueries.js';
+import { membershipDeleteMany } from './../../models/memberships/membershipQueries.js';
+import { postDeleteMany } from './../../models/posts/postQueries.js';
+import { postVoteDeleteMany } from './../../models/postVotes/postVoteQueries.js';
+import { commentDeleteMany } from './../../models/comments/commentQueries.js';
+import { commentVoteDeleteMany } from './../../models/commentVotes/commentVoteQueries.js';
 import { validateUsername, validateId } from './../../functions/validation.js';
 const deleteTeam = async (req, res) => {
     const username = req.username;
@@ -9,6 +15,7 @@ const deleteTeam = async (req, res) => {
     let response = null;
     let findUser = null;
     let findTeam = null;
+    let session = null;
     if(validatedUsername === false){
         response = {
             status: 401,
@@ -29,14 +36,23 @@ const deleteTeam = async (req, res) => {
                     message: 'invalid team ID'
                 }
             }else{
-                findTeam = await teamFindOne({_id: teamID, leader: findUser._id.toString()}, '_id');
+                findTeam = await teamFindOne({_id: teamID, leader: findUser._id}, '_id');
                 if(findTeam === null){
                     response = {
                         status: 404,
                         message: 'team not found'
                     }
                 }else{
-                    await teamDeleteOne({_id: findTeam._id.toString()});
+                    session = await mongoose.startSession();
+                    session.startTransaction();
+                    await teamDeleteOne({_id: findTeam._id}, {session});
+                    await membershipDeleteMany({team: findTeam._id}, {session});
+                    await postDeleteMany({team: findTeam._id}, {session});
+                    await postVoteDeleteMany({team: findTeam._id}, {session});
+                    await commentDeleteMany({team: findTeam._id}, {session});
+                    await commentVoteDeleteMany({team: findTeam._id}, {session});
+                    await session.commitTransaction();
+                    session.endSession();
                     response = {
                         status: 200,
                         message: 'team deleted'
