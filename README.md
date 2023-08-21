@@ -147,6 +147,7 @@
 ##### Request headers:
 * authorization `(STRING)`
 ##### Request body:
+* teamID `(STRING)`
 * postID `(STRING)`
 * vote `(NUMBER)`
 ##### Response object:
@@ -183,8 +184,8 @@
 * authorization `(STRING)`
 ##### Request body:
 * body `(STRING)`
-* user `(STRING)`
-* post `(STRING)`
+* teamID `(STRING)`
+* postID `(STRING)`
 ##### Response object:
 * message `(STRING)`
 ---
@@ -210,6 +211,7 @@
 ##### Request headers:
 * authorization `(STRING)`
 ##### Request body:
+* teamID `(STRING)`
 * commentID `(STRING)`
 * vote `(NUMBER)`
 ##### Response object:
