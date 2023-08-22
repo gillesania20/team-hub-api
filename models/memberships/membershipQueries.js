@@ -3,6 +3,10 @@ const membershipFindOne = async (conditions, projection, options) => {
     const query = await Membership.findOne(conditions, projection, options).lean().exec();
     return query;
 }
+const membershipFindAndPopulate = async (filter, projection, options) => {
+    const query = await Membership.find(filter, projection, options).populate('team', 'name').lean().exec();
+    return query;
+}
 const membershipCreate = async (docs, options) => {
     const query = await Membership.create(docs, options);
     return query;
@@ -17,6 +21,7 @@ const membershipDeleteMany = async (conditions, options) => {
 }
 export {
     membershipFindOne,
+    membershipFindAndPopulate,
     membershipCreate,
     membershipDeleteOne,
     membershipDeleteMany

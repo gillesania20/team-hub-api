@@ -91,6 +91,13 @@
 ##### Response object:
 * message `(STRING)`
 ---
+### `GET api/memberships`
+##### Request headers:
+* authorization `(STRING)`
+##### Response object:
+* message `(STRING)`
+* memberships `(ARRAY)` **or** `(NULL)`
+---
 ### `POST api/memberships`
 ##### Request headers:
 * authorization `(STRING)`
