@@ -54,6 +54,15 @@
 * message `(STRING)`
 * team `(OBJECT)` **or** `(NULL)`
 ---
+### `GET api/teams/`
+##### Request headers:
+* authorization `(STRING)`
+##### Request body:
+* teamName `(STRING)`
+##### Response object:
+* message `(STRING)`
+* teams `(ARRAY)`
+---
 ### `POST api/teams`
 ##### Request headers:
 * authorization `(STRING)`
