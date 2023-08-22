@@ -4,7 +4,7 @@ const commentFind = async (filter, projection, options) => {
     return query;
 }
 const commentFindAndPopulate = async (filter, projection, options) => {
-    const query = await Comment.find(filter, projection, options).populate('user', 'username').lean().exec();
+    const query = await Comment.find(filter, projection, options).populate('user', 'username').sort({created_at: 1}).lean().exec();
     return query;
 }
 const commentFindOne = async (conditions, projection, options) => {
