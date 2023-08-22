@@ -91,6 +91,15 @@
 ##### Response object:
 * message `(STRING)`
 ---
+### `GET api/memberships/get-single`
+##### Request headers:
+* authorization `(STRING)`
+##### Request body:
+* teamID `(STRING)`
+##### Response object:
+* message: `(STRING)`
+* membership `(OBJECT)` **or** `(NULL)`
+---
 ### `GET api/memberships`
 ##### Request headers:
 * authorization `(STRING)`
