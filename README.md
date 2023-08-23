@@ -246,6 +246,17 @@
 ##### Response object:
 * message `(STRING)`
 ---
+### `GET api/comment_votes/:commentVoteID`
+##### Request headers:
+* authorization `(STRING)`
+##### Request path parameters:
+* commentVoteID `(STRING)`
+##### Request body:
+* teamID `(STRING)`
+##### Response object:
+* message `(STRING)`
+* commentVote `(OBJECT)` **or** `(NULL)`
+---
 ### `POST api/comment_votes`
 ##### Request headers:
 * authorization `(STRING)`
