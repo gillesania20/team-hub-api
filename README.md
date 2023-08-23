@@ -168,6 +168,17 @@
 ##### Response object:
 * message `(STRING)`
 ---
+### `GET api/post_votes/:postVoteID`
+##### Request headers:
+* authorization `(STRING)`
+##### Request path parameters:
+* postVoteID `(STRING)`
+##### Request body:
+* teamID `(STRING)`
+##### Response object:
+* message: `(STRING)`
+* postVote: `(OBJECT)` **or** `(NULL)`
+---
 ### `POST api/post_votes`
 ##### Request headers:
 * authorization `(STRING)`
@@ -183,6 +194,9 @@
 * authorization `(STRING)`
 ##### Request path parameters:
 * postVoteID `(STRING)`
+##### Request body:
+* teamID `(STRING)`
+* postID `(STRING)`
 ##### Response object:
 * message `(STRING)`
 ---
@@ -247,6 +261,9 @@
 * authorization `{STRING}`
 ##### Request path parameters:
 * commentVoteID `(STRING)`
+##### Request body:
+* teamID `(STRING)`
+* commentID `(STRING)`
 ##### Response object:
 * message `(STRING)`
 ---
