@@ -1,9 +1,9 @@
 import { userFindOne } from './../../models/users/userQueries.js';
 import { teamFindOne } from './../../models/teams/teamQueries.js';
 import { postFindOne, postUpdateOne } from './../../models/posts/postQueries.js';
-import { postVoteFindOne, postVoteCreate, postVoteFind } from './../../models/postVotes/postVoteQueries.js';
+import { postVoteFindOne, postVoteCreate, postVoteFind, postVoteUpdateOne } from './../../models/postVotes/postVoteQueries.js';
 import { validateUsername, validateId, validateVote } from './../../functions/validation.js';
-const addPostVote = async (req, res) => {
+const addOrUpdatePostVote = async (req, res) => {
     const username = req.username;
     const teamID = req.body.teamID;
     const postID = req.body.postID;
@@ -61,36 +61,33 @@ const addPostVote = async (req, res) => {
                                 message: 'post not found'
                             }
                         }else{
-                            findPostVote = await postVoteFindOne({user: findUser._id, post: findPost._id},
-                                '_id');
-                            if(findPostVote !== null){
+                            validatedVote = validateVote(vote);
+                            if(validatedVote === false){
                                 response = {
                                     status: 400,
-                                    message: 'post-vote already exist'
+                                    message: 'invalid vote. should be a number. value should be 1 or -1 only'
                                 }
                             }else{
-                                validatedVote = validateVote(vote);
-                                if(validatedVote === false){
-                                    response = {
-                                        status: 400,
-                                        message: 'invalid vote. should be a number. value should be 1 or -1 only'
-                                    }
-                                }else{
+                                findPostVote = await postVoteFindOne({user: findUser._id, post: findPost._id},
+                                    '_id');
+                                if(findPostVote === null){
                                     await postVoteCreate(
                                         {user: findUser._id, post: findPost._id, team: findTeam._id, vote});
-                                    findPostVotes = await postVoteFind({post: findPost._id}, 'vote');
-                                    for(let i = 0; i < findPostVotes.length; i++){
-                                        if(findPostVotes[i].vote === 1){
-                                            likes++;
-                                        }else if(findPostVotes[i].vote === -1){
-                                            dislikes++;
-                                        }
+                                }else{
+                                    await postVoteUpdateOne({_id: findPostVote._id}, {vote});
+                                }
+                                findPostVotes = await postVoteFind({post: findPost._id}, 'vote');
+                                for(let i = 0; i < findPostVotes.length; i++){
+                                    if(findPostVotes[i].vote === 1){
+                                        likes++;
+                                    }else if(findPostVotes[i].vote === -1){
+                                        dislikes++;
                                     }
-                                    await postUpdateOne({_id: findPost._id}, {likes, dislikes});
-                                    response = {
-                                        status: 201,
-                                        message: 'post-vote created'
-                                    }
+                                }
+                                await postUpdateOne({_id: findPost._id}, {likes, dislikes});
+                                response = {
+                                    status: 201,
+                                    message: 'post-vote created or updated'
                                 }
                             }
                         }
@@ -101,4 +98,4 @@ const addPostVote = async (req, res) => {
     }
     return res.status(response.status).json({message: response.message});
 }
-export default addPostVote;
+export default addOrUpdatePostVote;

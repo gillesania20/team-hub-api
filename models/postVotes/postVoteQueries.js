@@ -11,6 +11,10 @@ const postVoteCreate = async (docs, options) => {
     const query = await PostVote.create(docs, options);
     return query;
 }
+const postVoteUpdateOne = async (filter, update, options) => {
+    const query = await PostVote.updateOne(filter, update, options);
+    return query;
+}
 const postVoteDeleteOne = async (conditions, options) => {
     const query = await PostVote.deleteOne(conditions, options);
     return query;
@@ -23,6 +27,7 @@ export {
     postVoteFindOne,
     postVoteFind,
     postVoteCreate,
+    postVoteUpdateOne,
     postVoteDeleteOne,
     postVoteDeleteMany
 }
