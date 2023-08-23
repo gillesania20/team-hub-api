@@ -6,7 +6,7 @@ const commentVoteSchema = new mongoose.Schema({
     comment: { type: mongoose.Schema.Types.ObjectId, ref: Comment, required: true },
     user: { type: mongoose.Schema.Types.ObjectId, ref: User, required: true },
     team: { type: mongoose.Schema.Types.ObjectId, ref: Team, required: true },
-    vote: { type: Number, required: true }
+    vote: { type: Number, enum: [ 1, -1 ], required: true }
 },
 {
     timestamps: {
