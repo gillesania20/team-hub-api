@@ -1,7 +1,7 @@
 import { userFindOne } from './../../models/users/userQueries.js';
 import { teamFindOne } from './../../models/teams/teamQueries.js';
-import { postFindOne } from './../../models/posts/postQueries.js';
-import { postVoteFindOne, postVoteCreate } from './../../models/postVotes/postVoteQueries.js';
+import { postFindOne, postUpdateOne } from './../../models/posts/postQueries.js';
+import { postVoteFindOne, postVoteCreate, postVoteFind } from './../../models/postVotes/postVoteQueries.js';
 import { validateUsername, validateId, validateVote } from './../../functions/validation.js';
 const addPostVote = async (req, res) => {
     const username = req.username;
@@ -17,6 +17,9 @@ const addPostVote = async (req, res) => {
     let findTeam = null;
     let findPost = null;
     let findPostVote = null;
+    let findPostVotes= null;
+    let likes = 0;
+    let dislikes = 0;
     if(validatedUsername === false){
         response = {
             status: 401,
@@ -75,6 +78,15 @@ const addPostVote = async (req, res) => {
                                 }else{
                                     await postVoteCreate(
                                         {user: findUser._id, post: findPost._id, team: findTeam._id, vote});
+                                    findPostVotes = await postVoteFind({post: findPost._id}, 'vote');
+                                    for(let i = 0; i < findPostVotes.length; i++){
+                                        if(findPostVotes[i].vote === 1){
+                                            likes++;
+                                        }else if(findPostVotes[i].vote === -1){
+                                            dislikes++;
+                                        }
+                                    }
+                                    await postUpdateOne({_id: findPost._id}, {likes, dislikes});
                                     response = {
                                         status: 201,
                                         message: 'post-vote created'

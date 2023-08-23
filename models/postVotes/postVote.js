@@ -6,7 +6,7 @@ const postVoteSchema = new mongoose.Schema({
     post: { type: mongoose.Schema.Types.ObjectId, ref: Post, required: true },
     user: { type: mongoose.Schema.Types.ObjectId, ref: User, required: true },
     team: { type: mongoose.Schema.Types.ObjectId, ref: Team, required: true },
-    vote: { type: Number, required: true}
+    vote: { type: Number, enum: [ 1, -1 ], required: true}
 },
 {
     timestamps: {
@@ -14,6 +14,6 @@ const postVoteSchema = new mongoose.Schema({
         updatedAt: 'updated_at'
     }
 });
-postVoteSchema.index({ post: 1, user: 1 }, { unique: true });
+postVoteSchema.index({ post: 1, user: 1, team: 1, vote: 1 }, { unique: true });
 const PostVote = mongoose.model('postVote', postVoteSchema);
 export default PostVote;
