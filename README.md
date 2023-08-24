@@ -173,8 +173,6 @@
 * authorization `(STRING)`
 ##### Request path parameters:
 * postVoteID `(STRING)`
-##### Request body:
-* teamID `(STRING)`
 ##### Response object:
 * message: `(STRING)`
 * postVote: `(OBJECT)` **or** `(NULL)`
