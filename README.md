@@ -195,7 +195,6 @@
 ##### Request path parameters:
 * postVoteID `(STRING)`
 ##### Request body:
-* teamID `(STRING)`
 * postID `(STRING)`
 ##### Response object:
 * message `(STRING)`
