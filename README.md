@@ -270,7 +270,6 @@
 ##### Request path parameters:
 * commentVoteID `(STRING)`
 ##### Request body:
-* teamID `(STRING)`
 * commentID `(STRING)`
 ##### Response object:
 * message `(STRING)`
