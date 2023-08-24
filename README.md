@@ -248,8 +248,6 @@
 * authorization `(STRING)`
 ##### Request path parameters:
 * commentVoteID `(STRING)`
-##### Request body:
-* teamID `(STRING)`
 ##### Response object:
 * message `(STRING)`
 * commentVote `(OBJECT)` **or** `(NULL)`
