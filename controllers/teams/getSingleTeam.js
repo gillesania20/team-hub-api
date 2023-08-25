@@ -1,5 +1,5 @@
 import { userFindOne } from './../../models/users/userQueries.js';
-import { teamFindOne } from './../../models/teams/teamQueries.js';
+import { teamFindOneAndPopulate } from './../../models/teams/teamQueries.js';
 import { validateUsername, validateId } from './../../functions/validation.js';
 const getSingleTeam = async (req, res) => {
     const username = req.username;
@@ -32,7 +32,7 @@ const getSingleTeam = async (req, res) => {
                     team: null
                 }
             }else{
-                findTeam = await teamFindOne({_id: teamID, leader: findUser._id.toString()},
+                findTeam = await teamFindOneAndPopulate({_id: teamID},
                     '_id name leader created_at');
                 if(findTeam === null){
                     response = {

@@ -11,6 +11,10 @@ const teamFindOne = async (conditions, projection, options) => {
     const query = await Team.findOne(conditions, projection, options).lean().exec();
     return query;
 }
+const teamFindOneAndPopulate = async (conditions, projection, options) => {
+    const query = await Team.findOne(conditions, projection, options).populate('leader', 'username').lean().exec();
+    return query;
+}
 const teamDeleteOne = async (filter, options) => {
     const query = await Team.deleteOne(filter, options);
     return query;
@@ -23,6 +27,7 @@ export {
     teamCreate,
     teamFindAndPopulate,
     teamFindOne,
+    teamFindOneAndPopulate,
     teamDeleteOne,
     teamUpdateOne
 }

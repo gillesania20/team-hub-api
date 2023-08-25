@@ -4,7 +4,7 @@ const postFindOne = async (conditions, projection, options) => {
     return query;
 }
 const postFindAndPopulate = async (filter, projection, options) => {
-    const query = await Post.find(filter, projection, options).populate('user', 'username').sort({created_at: 1}).lean().exec();
+    const query = await Post.find(filter, projection, options).populate('user', 'username').sort({created_at: -1}).lean().exec();
     return query;
 }
 const postCreate = async (docs, options) => {
