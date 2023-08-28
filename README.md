@@ -6,11 +6,11 @@
 ##### Response object:
 * message `(STRING)`
 * accessToken `(OBJECT)` **or** `(NULL)`
-##### Response cookie:
+##### Response cookies:
 * jwt `(STRING)`
 ---
 ### `POST api/auth/refresh`
-##### Request cookie:
+##### Request cookies:
 * jwt `(STRING)`
 ##### Response object:
 * message `(STRING)`
@@ -271,4 +271,16 @@
 * commentID `(STRING)`
 ##### Response object:
 * message `(STRING)`
+---
+### `GET api/cookie_checker`
+##### Request cookies:
+* acceptsCookies `(BOOLEAN)`
+##### Response object:
+* message: `(STRING)`
+---
+### `POST api/cookie_checker`
+##### Response object:
+* message: `(STRING)`
+##### Response cookies:
+* acceptsCookies `(BOOLEAN)`
 ---
