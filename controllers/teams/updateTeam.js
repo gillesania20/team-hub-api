@@ -12,6 +12,9 @@ const updateTeam = async (req, res) => {
     let response = null;
     let findUser = null;
     let findTeam = null;
+    let findTeamWithSimilarName = null;
+    let regex = null;
+    let stringPattern = null;
     if(validatedUsername === false){
         response = {
             status: 401,
@@ -32,7 +35,7 @@ const updateTeam = async (req, res) => {
                     message: 'invalid team ID'
                 }
             }else{
-                findTeam = await teamFindOne({_id: teamID, leader: findUser._id.toString()}, '_id');
+                findTeam = await teamFindOne({_id: teamID, leader: findUser._id}, '_id');
                 if(findTeam === null){
                     response = {
                         status: 404,
@@ -49,12 +52,25 @@ const updateTeam = async (req, res) => {
                         }
                     }else{
                         if(typeof name !== 'undefined'){
-                            update.name = name;
+                            stringPattern = `^${name}\$`;
+                            regex = new RegExp(stringPattern, 'i');
+                            findTeamWithSimilarName = await teamFindOne(
+                                {name: {$regex: regex}, leader: findUser._id, _id: {$ne: findTeam._id}}, '_id');
                         }
-                        await teamUpdateOne({_id: findTeam._id.toString()}, update);
-                        response = {
-                            status: 200,
-                            message: 'updated team data'
+                        if(typeof name !== 'undefined' && findTeamWithSimilarName !== null){
+                            response = {
+                                status: 400,
+                                message: 'team name not available'
+                            }
+                        }else{
+                            if(typeof name !== 'undefined'){
+                                update.name = name;
+                            }
+                            await teamUpdateOne({_id: findTeam._id}, update);
+                            response = {
+                                status: 200,
+                                message: 'updated team data'
+                            }
                         }
                     }
                 }

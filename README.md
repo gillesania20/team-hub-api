@@ -274,7 +274,7 @@
 ---
 ### `GET api/cookie_checker`
 ##### Request cookies:
-* acceptsCookies `(BOOLEAN)`
+* acceptsCookies `(STRING)`
 ##### Response object:
 * message: `(STRING)`
 ---
@@ -282,5 +282,5 @@
 ##### Response object:
 * message: `(STRING)`
 ##### Response cookies:
-* acceptsCookies `(BOOLEAN)`
+* acceptsCookies `(STRING)`
 ---

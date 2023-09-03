@@ -34,10 +34,15 @@ const updateUser = async (req, res) => {
                 message: 'user not found'
             }
         }else{
-            validatedUsername = validateUsername(username);
-            validatedPassword = validatePassword(password);
-            validatedBirthday = validateBirthday(birthday);
-            findAllWithSimilarUsername = await userFind({username, _id: {$ne: findUser._id.toString()}});
+            if(typeof username === 'string'){
+                validatedUsername = validateUsername(username);
+            }
+            if(typeof password === 'string'){
+                validatedPassword = validatePassword(password);
+            }
+            if(typeof birthday === 'string'){
+                validatedBirthday = validateBirthday(birthday);
+            }
             if(typeof username === 'string' && validatedUsername === false){
                 response = {
                     status: 400,
@@ -53,26 +58,31 @@ const updateUser = async (req, res) => {
                     status: 400,
                     message: 'invalid birthday. year-month-day, format: yyyy-mm-dd, 18 years old and above only'
                 }
-            }else if(findAllWithSimilarUsername.length > 0){
-                response = {
-                    status: 400,
-                    message: 'username already taken'
-                }
             }else{
                 if(typeof username === 'string'){
-                    update.username = username;
+                    findAllWithSimilarUsername = await userFind({username, _id: {$ne: findUser._id}});
                 }
-                if(typeof password === 'string'){
-                    hashedPassword = bcrypt.hashSync(password, SALT_ROUNDS);
-                    update.password = hashedPassword;
-                }
-                if(typeof birthday === 'string'){
-                    update.birthday = birthday;
-                }
-                await userUpdateOne({_id: userID}, update);
-                response = {
-                    status: 200,
-                    message: 'updated user data'
+                if(typeof username === 'string' && findAllWithSimilarUsername.length > 0){
+                    response = {
+                        status: 400,
+                        message: 'username already taken'
+                    }
+                }else{
+                    if(typeof username === 'string'){
+                        update.username = username;
+                    }
+                    if(typeof password === 'string'){
+                        hashedPassword = bcrypt.hashSync(password, SALT_ROUNDS);
+                        update.password = hashedPassword;
+                    }
+                    if(typeof birthday === 'string'){
+                        update.birthday = birthday;
+                    }
+                    await userUpdateOne({_id: userID}, update);
+                    response = {
+                        status: 200,
+                        message: 'updated user data'
+                    }
                 }
             }
         }
