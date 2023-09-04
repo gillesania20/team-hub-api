@@ -5,7 +5,7 @@ import { postFindAndPopulate } from './../../models/posts/postQueries.js';
 import { validateUsername, validateId } from './../../functions/validation.js';
 const getAllPosts = async (req, res) => {
     const username = req.username;
-    const teamID = req.body.teamID;
+    const teamID = req.params.teamID;
     const validatedUsername = validateUsername(username);
     let validatedTeamId = false;
     let response = null;

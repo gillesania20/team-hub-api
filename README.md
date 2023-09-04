@@ -54,10 +54,10 @@
 * message `(STRING)`
 * team `(OBJECT)` **or** `(NULL)`
 ---
-### `GET api/teams/`
+### `GET api/teams/search-team/:teamName`
 ##### Request headers:
 * authorization `(STRING)`
-##### Request body:
+##### Request path parameters:
 * teamName `(STRING)`
 ##### Response object:
 * message `(STRING)`
@@ -91,10 +91,10 @@
 ##### Response object:
 * message `(STRING)`
 ---
-### `GET api/memberships/get-single`
+### `GET api/memberships/get-single/:teamID`
 ##### Request headers:
 * authorization `(STRING)`
-##### Request body:
+##### Request path parameters:
 * teamID `(STRING)`
 ##### Response object:
 * message: `(STRING)`
@@ -119,14 +119,14 @@
 ##### Request headers:
 * authorization `(STRING)`
 ##### Request path parameters:
-* membershipID
+* membershipID `(STRING)`
 ##### Response object:
 * message `(STRING)`
 ---
-### `GET api/posts`
+### `GET api/posts/get-all-posts/:teamID`
 ##### Request headers:
 * authorization `(STRING)`
-##### Request body:
+##### Request path parameters:
 * teamID `(STRING)`
 ##### Response object:
 * message `(STRING)`
@@ -197,10 +197,10 @@
 ##### Response object:
 * message `(STRING)`
 ---
-### `GET api/comments`
+### `GET api/comments/get-all-comments/:postID`
 ##### Request headers:
 * authorization `(STRING)`
-##### Request body:
+##### Request path parameters:
 * postID `(STRING)`
 ##### Response object:
 * message `(STRING)`

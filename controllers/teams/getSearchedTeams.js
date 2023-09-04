@@ -3,7 +3,7 @@ import { teamFindAndPopulate } from './../../models/teams/teamQueries.js';
 import { validateUsername, validateTeamName } from './../../functions/validation.js';
 const getSearchedTeams = async (req, res) => {
     const username = req.username;
-    const teamName = req.body.teamName;
+    const teamName = req.params.teamName;
     const validatedUsername = validateUsername(username);
     let validatedTeamName = false;
     let findUser = null;

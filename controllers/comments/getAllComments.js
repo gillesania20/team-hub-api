@@ -4,7 +4,7 @@ import { commentFindAndPopulate } from './../../models/comments/commentQueries.j
 import { validateUsername, validateId } from './../../functions/validation.js';
 const getAllComments = async (req, res) => {
     const username = req.username;
-    const postID = req.body.postID;
+    const postID = req.params.postID;
     const validatedUsername = validateUsername(username);
     let validatedPostId = false;
     let response = null;

@@ -4,7 +4,7 @@ import { membershipFindOne } from './../../models/memberships/membershipQueries.
 import { validateUsername, validateId } from './../../functions/validation.js';
 const getSingleMembership = async (req, res) => {
     const username = req.username;
-    const teamID = req.body.teamID;
+    const teamID = req.params.teamID;
     const validatedUsername = validateUsername(username);
     let validatedTeamId = false;
     let findUser = null;

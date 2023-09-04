@@ -6,7 +6,7 @@ import getSinglePost from './../../controllers/posts/getSinglePost.js';
 import updatePost from './../../controllers/posts/updatePost.js';
 import verifyJWT from './../../middlewares/verifyJWT.js';
 const router = express.Router();
-router.get('/', verifyJWT, getAllPosts);
+router.get('/get-all-posts/:teamID', verifyJWT, getAllPosts);
 router.get('/:postID', verifyJWT, getSinglePost);
 router.post('/', verifyJWT, addPost);
 router.patch('/:postID', verifyJWT, updatePost);

@@ -5,7 +5,7 @@ import addMembership from './../../controllers/memberships/addMembership.js';
 import deleteMembership from './../../controllers/memberships/deleteMembership.js';
 import verifyJWT from './../../middlewares/verifyJWT.js';
 const router = express.Router();
-router.get('/get-single', verifyJWT, getSingleMembership);
+router.get('/get-single/:teamID', verifyJWT, getSingleMembership);
 router.get('/', verifyJWT, getAllMemberships);
 router.post('/', verifyJWT, addMembership);
 router.delete('/:membershipID', verifyJWT, deleteMembership);

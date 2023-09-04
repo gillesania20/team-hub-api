@@ -6,7 +6,7 @@ import getSingleTeam from './../../controllers/teams/getSingleTeam.js';
 import getSearchedTeams from './../../controllers/teams/getSearchedTeams.js';
 import updateTeam from './../../controllers/teams/updateTeam.js';
 const router = express.Router();
-router.get('/', verifyJWT, getSearchedTeams);
+router.get('/search-team/:teamName', verifyJWT, getSearchedTeams);
 router.get('/:teamID', verifyJWT, getSingleTeam);
 router.post('/', verifyJWT, addTeam);
 router.patch('/:teamID', verifyJWT, updateTeam);
