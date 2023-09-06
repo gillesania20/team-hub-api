@@ -22,7 +22,7 @@ const getAllMemberships = async (req, res) => {
                 memberships: null
             }
         }else{
-            findMemberships = await membershipFindAndPopulate({user: findUser._id}, 'user team');
+            findMemberships = await membershipFindAndPopulate({user: findUser._id}, 'team');
             if(findMemberships.length <= 0){
                 response = {
                     status: 404,
