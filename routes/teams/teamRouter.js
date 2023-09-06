@@ -1,10 +1,10 @@
 import express from 'express';
 import verifyJWT from './../../middlewares/verifyJWT.js';
-import addTeam from './../../controllers/teams/addTeam.js';
-import deleteTeam from './../../controllers/teams/deleteTeam.js';
-import getSingleTeam from './../../controllers/teams/getSingleTeam.js';
 import getSearchedTeams from './../../controllers/teams/getSearchedTeams.js';
+import getSingleTeam from './../../controllers/teams/getSingleTeam.js';
+import addTeam from './../../controllers/teams/addTeam.js';
 import updateTeam from './../../controllers/teams/updateTeam.js';
+import deleteTeam from './../../controllers/teams/deleteTeam.js';
 const router = express.Router();
 router.get('/search-team/:teamName', verifyJWT, getSearchedTeams);
 router.get('/:teamID', verifyJWT, getSingleTeam);
