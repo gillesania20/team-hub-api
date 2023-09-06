@@ -4,7 +4,7 @@ const membershipFindOne = async (conditions, projection, options) => {
     return query;
 }
 const membershipFindAndPopulate = async (filter, projection, options) => {
-    const query = await Membership.find(filter, projection, options).populate('team', 'name').populate('user', 'username').lean().exec();
+    const query = await Membership.find(filter, projection, options).populate('team', 'name').lean().exec();
     return query;
 }
 const membershipCreate = async (docs, options) => {
