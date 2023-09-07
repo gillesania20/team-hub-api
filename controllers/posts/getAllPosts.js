@@ -49,7 +49,7 @@ const getAllPosts = async (req, res) => {
                             message: 'not authorized'
                         }
                     }else{
-                        findPosts = await postFindAndPopulate({team: findTeam._id.toString()}, 'body created_at');
+                        findPosts = await postFindAndPopulate({team: findTeam._id.toString()}, 'body created_at likes dislikes');
                         response = {
                             status: 200,
                             message: 'posts found',

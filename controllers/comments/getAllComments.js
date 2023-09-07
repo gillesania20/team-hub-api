@@ -43,7 +43,7 @@ const getAllComments = async (req, res) => {
                     }
                 }else{
                     findComments = await commentFindAndPopulate({post: findPost._id.toString()},
-                        'body created_at');
+                        'body created_at likes dislikes');
                     response = {
                         status: 200,
                         message: 'comments found',
