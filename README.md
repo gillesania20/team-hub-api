@@ -91,13 +91,23 @@
 ##### Response object:
 * message `(STRING)`
 ---
-### `GET api/memberships/get-single/:teamID`
+### `GET api/memberships/get-single-membership/:teamID`
 ##### Request headers:
 * authorization `(STRING)`
 ##### Request path parameters:
 * teamID `(STRING)`
 ##### Response object:
 * message: `(STRING)`
+* membership `(OBJECT)` **or** `(NULL)`
+---
+### `GET api/memberships/check-membership/:userID/:teamID`
+##### Request headers:
+* authorization `(STRING)`
+##### Request path parameters:
+* userID `(STRING)`
+* teamID `(STRING)`
+##### Response object:
+* message: `(STRING)`,
 * membership `(OBJECT)` **or** `(NULL)`
 ---
 ### `GET api/memberships`

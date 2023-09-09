@@ -1,11 +1,13 @@
 import express from 'express';
 import getSingleMembership from './../../controllers/memberships/getSingleMembership.js';
+import getCheckMembership from './../../controllers/memberships/getCheckMembership.js';
 import getAllMemberships from './../../controllers/memberships/getAllMemberships.js';
 import addMembership from './../../controllers/memberships/addMembership.js';
 import deleteMembership from './../../controllers/memberships/deleteMembership.js';
 import verifyJWT from './../../middlewares/verifyJWT.js';
 const router = express.Router();
-router.get('/get-single/:teamID', verifyJWT, getSingleMembership);
+router.get('/get-single-membership/:teamID', verifyJWT, getSingleMembership);
+router.get('/check-membership/:userID/:teamID', verifyJWT, getCheckMembership);
 router.get('/', verifyJWT, getAllMemberships);
 router.post('/', verifyJWT, addMembership);
 router.delete('/:membershipID', verifyJWT, deleteMembership);
