@@ -178,11 +178,11 @@
 ##### Response object:
 * message `(STRING)`
 ---
-### `GET api/post_votes/:postVoteID`
+### `GET api/post_votes/:postID`
 ##### Request headers:
 * authorization `(STRING)`
 ##### Request path parameters:
-* postVoteID `(STRING)`
+* postID `(STRING)`
 ##### Response object:
 * message: `(STRING)`
 * postVote: `(OBJECT)` **or** `(NULL)`

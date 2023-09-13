@@ -4,7 +4,7 @@ import addOrUpdatePostVote from './../../controllers/postVotes/addOrUpdatePostVo
 import deletePostVote from './../../controllers/postVotes/deletePostVote.js';
 import verifyJWT from './../../middlewares/verifyJWT.js';
 const router = express.Router();
-router.get('/:postVoteID', verifyJWT, getSinglePostVote);
+router.get('/:postID', verifyJWT, getSinglePostVote);
 router.post('/', verifyJWT, addOrUpdatePostVote);
 router.delete('/:postVoteID', verifyJWT, deletePostVote);
 export default router;

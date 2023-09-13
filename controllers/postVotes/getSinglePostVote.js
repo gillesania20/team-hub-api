@@ -3,9 +3,9 @@ import { postVoteFindOne } from './../../models/postVotes/postVoteQueries.js';
 import { validateUsername, validateId } from './../../functions/validation.js';
 const getSinglePostVote = async (req, res) => {
     const username = req.username;
-    const postVoteID = req.params.postVoteID;
+    const postID = req.params.postID;
     const validatedUsername = validateUsername(username);
-    let validatedPostVoteId = false;
+    let validatedPostId = false;
     let findUser = null;
     let findPostVote = null;
     let response = null;
@@ -24,15 +24,15 @@ const getSinglePostVote = async (req, res) => {
                 postVote: null
             }
         }else{
-            validatedPostVoteId = validateId(postVoteID);
-            if(validatedPostVoteId === false){
+            validatedPostId = validateId(postID);
+            if(validatedPostId === false){
                 response = {
                     status: 400,
-                    message: 'invalid post-vote ID',
+                    message: 'invalid post ID',
                     postVote: null
                 }
             }else{
-                findPostVote = await postVoteFindOne({_id: postVoteID}, 'id vote');
+                findPostVote = await postVoteFindOne({user: findUser._id, post: postID}, 'id vote');
                 if(findPostVote === null){
                     response = {
                         status: 404,
