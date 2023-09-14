@@ -35,7 +35,7 @@ const getSinglePostVote = async (req, res) => {
                 findPostVote = await postVoteFindOne({user: findUser._id, post: postID}, 'id vote');
                 if(findPostVote === null){
                     response = {
-                        status: 404,
+                        status: 200,
                         message: 'post-vote not found',
                         postVote: null
                     }
