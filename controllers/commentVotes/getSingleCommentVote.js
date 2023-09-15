@@ -3,9 +3,9 @@ import { commentVoteFindOne } from './../../models/commentVotes/commentVoteQueri
 import { validateUsername, validateId } from './../../functions/validation.js';
 const getSingleCommentVote = async (req, res) => {
     const username = req.username;
-    const commentVoteID = req.params.commentVoteID;
+    const commentID = req.params.commentID;
     const validatedUsername = validateUsername(username);
-    let validatedCommentVoteId = false;
+    let validatedCommentId = false;
     let findUser = null;
     let findCommentVote = null;
     let response = null;
@@ -24,18 +24,18 @@ const getSingleCommentVote = async (req, res) => {
                 commentVote: null
             }
         }else{
-            validatedCommentVoteId = validateId(commentVoteID);
-            if(validatedCommentVoteId === false){
+            validatedCommentId = validateId(commentID);
+            if(validatedCommentId === false){
                 response = {
                     status: 400,
-                    message: 'invalid comment-vote ID',
+                    message: 'invalid comment ID',
                     commentVote: null
                 }
             }else{
-                findCommentVote = await commentVoteFindOne({_id: commentVoteID}, '_id vote');
+                findCommentVote = await commentVoteFindOne({user: findUser._id, comment: commentID}, '_id vote');
                 if(findCommentVote === null){
                     response = {
-                        status: 404,
+                        status: 200,
                         message: 'comment-vote not found',
                         commentVote: null
                     }

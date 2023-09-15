@@ -253,11 +253,11 @@
 ##### Response object:
 * message `(STRING)`
 ---
-### `GET api/comment_votes/:commentVoteID`
+### `GET api/comment_votes/:commentID`
 ##### Request headers:
 * authorization `(STRING)`
 ##### Request path parameters:
-* commentVoteID `(STRING)`
+* commentID `(STRING)`
 ##### Response object:
 * message `(STRING)`
 * commentVote `(OBJECT)` **or** `(NULL)`

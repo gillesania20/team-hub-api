@@ -14,6 +14,6 @@ const postVoteSchema = new mongoose.Schema({
         updatedAt: 'updated_at'
     }
 });
-postVoteSchema.index({ post: 1, user: 1, team: 1, vote: 1 }, { unique: true });
+postVoteSchema.index({ post: 1, user: 1 }, { unique: true });
 const PostVote = mongoose.model('postVote', postVoteSchema);
 export default PostVote;
