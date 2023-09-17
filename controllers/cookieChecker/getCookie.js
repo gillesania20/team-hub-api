@@ -3,7 +3,7 @@ const getCookie = (req, res) => {
     let response = null;
     if(typeof acceptsCookies === 'undefined'){
         response = {
-            status: 404,
+            status: 200,
             message: 'cookie not found'
         }
     }else{
