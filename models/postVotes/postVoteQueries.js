@@ -1,4 +1,5 @@
 import PostVote from './postVote.js';
+
 const postVoteFindOne = async (conditions, projection, options) => {
     const query = await PostVote.findOne(conditions, projection, options).lean().exec();
     return query;
