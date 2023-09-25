@@ -1,4 +1,4 @@
 const allowedOriginsArray = [
-    'http://localhost:3000'
+    'https://team-hub-lgre.onrender.com'
 ]
 export default allowedOriginsArray;
