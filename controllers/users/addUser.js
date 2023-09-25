@@ -23,9 +23,10 @@ const addUser = async (req, res) => {
             message: 'invalid password. atleast one letter, number, and special character then minimum length is 8 and maximum is 20 characters'
         }
     }else if(validatedBirthday === false){
+        // frontend code displays dd-mm-yyyy format
         response = {
             status: 400,
-            message: 'invalid birthday. year-month-day, format: yyyy-mm-dd'
+            message: 'invalid birthday. day-month-year, format: dd-mm-yyyy, 18 years old and above only'
         }
     }else{
         findUser = await userFindOne({username}, '_id');
