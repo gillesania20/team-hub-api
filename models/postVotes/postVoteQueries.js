@@ -1,4 +1,4 @@
-//import PostVote from './PostVote.js';
+import test from './../posts/Post.js';
 import PostVote from './PostVote.js';
 const postVoteFindOne = async (conditions, projection, options) => {
     const query = await PostVote.findOne(conditions, projection, options).lean().exec();
