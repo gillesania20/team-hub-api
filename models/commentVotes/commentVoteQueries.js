@@ -1,4 +1,4 @@
-import CommentVote from './CommentVote.js';
+import CommentVote from './commentVote.js';
 const commentVoteFindOne = async (conditions, projection, options) => {
     const query = await CommentVote.findOne(conditions, projection, options).lean().exec();
     return query;
